@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.service.name }}
+  labels:
+    app: {{ .Values.service.name }}
+spec:
+  replicas: {{ .Values.environment.replicas.quantity }}
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ .Values.service.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.service.name }}
+    spec:
+      containers:
+        - name: {{ .Values.service.name }}
+          image: {{ .Values.image.name }}:{{ .Values.image.tag }}
+          env:
+            - name: SPRING_PROFILE
+              value: {{ .Values.environment.name }}
+            - name: JAVA_OPTIONS_EXT
+              value: "-Xms{{ .Values.environment.resources.xms }} -Xmx{{ .Values.environment.resources.xmx }} -XX:+AlwaysPreTouch -XX:+UseStringDeduplication -XX:+UseG1GC"
+          ports:
+            - name: http
+      restartPolicy: {{ .Values.image.restartPolicy }}

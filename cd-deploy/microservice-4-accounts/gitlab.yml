@@ -1,0 +1,41 @@
+build-image-microservice-4-accounts:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_4_ACCOUNTS/
+
+container-scanning-microservice-4-accounts:
+  stage: scanning
+  dependencies: [ build-image-microservice-4-accounts ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_4_ACCOUNTS/
+
+sign-image-microservice-4-accounts:
+  stage: sign
+  dependencies: [ build-image-microservice-4-accounts ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_4_ACCOUNTS/
+
+deploy-dev-microservice-4-accounts:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-4-accounts ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_4_ACCOUNTS/
+
+deploy-teststable-microservice-4-accounts:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-4-accounts ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_4_ACCOUNTS/

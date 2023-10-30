@@ -1,0 +1,41 @@
+build-image-microservice-8-savedetails:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_8_SAVEDETAILS/
+
+container-scanning-microservice-8-savedetails:
+  stage: scanning
+  dependencies: [ build-image-microservice-8-savedetails ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_8_SAVEDETAILS/
+
+sign-image-microservice-8-savedetails:
+  stage: sign
+  dependencies: [ build-image-microservice-8-savedetails ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_8_SAVEDETAILS/
+
+deploy-dev-microservice-8-savedetails:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-8-savedetails ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_8_SAVEDETAILS/
+
+deploy-teststable-microservice-8-savedetails:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-8-savedetails ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_8_SAVEDETAILS/

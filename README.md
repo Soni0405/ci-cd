@@ -1,7 +1,7 @@
 # ci-cd
 This repo is for CI/CD code for multiple microservices, here as a example we have pushed code for one code repo, and CD for multiple microservices as module in CD repo.
 
-Here we have one Ecommerce application, which is divided into multiple microservices, as below:
+Here we have taken an example of one Ecommerce application, which is divided into multiple microservices, as below:
 
 - Login page : microservice-1-login
 - Categories page : microservice-2-category

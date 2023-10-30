@@ -1,0 +1,41 @@
+build-image-microservice-1-login:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_1_LOGIN/
+
+container-scanning-microservice-1-login:
+  stage: scanning
+  dependencies: [ build-image-microservice-1-login ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_1_LOGIN/
+
+sign-image-microservice-1-login:
+  stage: sign
+  dependencies: [ build-image-microservice-1-login ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_1_LOGIN/
+
+deploy-dev-microservice-1-login:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-1-login ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_1_LOGIN/
+
+deploy-teststable-microservice-1-login:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-1-login ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_1_LOGIN/

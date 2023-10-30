@@ -1,0 +1,41 @@
+build-image-microservice-7-shopping-cart:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_7_SHOPPING_CART/
+
+container-scanning-microservice-7-shopping-cart:
+  stage: scanning
+  dependencies: [ build-image-microservice-7-shopping-cart ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_7_SHOPPING_CART/
+
+sign-image-microservice-7-shopping-cart:
+  stage: sign
+  dependencies: [ build-image-microservice-7-shopping-cart ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_7_SHOPPING_CART/
+
+deploy-dev-microservice-7-shopping-cart:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-7-shopping-cart ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_7_SHOPPING_CART/
+
+deploy-teststable-microservice-7-shopping-cart:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-7-shopping-cart ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_7_SHOPPING_CART/

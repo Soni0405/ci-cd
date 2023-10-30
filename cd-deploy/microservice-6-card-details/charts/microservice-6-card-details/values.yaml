@@ -1,0 +1,17 @@
+image:
+  name: "microservice-6-card-details"
+  tag: latest
+  restartPolicy: Always
+
+service:
+  type: ClusterIP
+  port: 80
+  name: microservice-6-card-details
+
+environment:
+  name: "default"
+  replicas:
+    quantity: 1
+  resources:
+    xmx: 700M
+    xms: 200M  

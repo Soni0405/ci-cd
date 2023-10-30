@@ -1,0 +1,41 @@
+build-image-microservice-3-payment:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_3_PAYMENT/
+
+container-scanning-microservice-3-payment:
+  stage: scanning
+  dependencies: [ build-image-microservice-3-payment ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_3_PAYMENT/
+
+sign-image-microservice-3-payment:
+  stage: sign
+  dependencies: [ build-image-microservice-3-payment ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_3_PAYMENT/
+
+deploy-dev-microservice-3-payment:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-3-payment ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_3_PAYMENT/
+
+deploy-teststable-microservice-3-payment:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-3-payment ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_3_PAYMENT/

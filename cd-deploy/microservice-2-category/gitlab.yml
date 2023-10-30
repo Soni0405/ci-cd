@@ -1,0 +1,41 @@
+build-image-microservice-2-category:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_2_CATEGORY/
+
+container-scanning-microservice-2-category:
+  stage: scanning
+  dependencies: [ build-image-microservice-2-category ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_2_CATEGORY/
+
+sign-image-microservice-2-category:
+  stage: sign
+  dependencies: [ build-image-microservice-2-category ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_2_CATEGORY/
+
+deploy-dev-microservice-2-category:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-2-category ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_2_CATEGORY/
+
+deploy-teststable-microservice-2-category:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-2-category ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_2_CATEGORY/

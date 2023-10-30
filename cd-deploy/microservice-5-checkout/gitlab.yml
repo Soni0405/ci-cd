@@ -1,0 +1,41 @@
+build-image-microservice-5-checkout:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_5_CHECKOUT/
+
+container-scanning-microservice-5-checkout:
+  stage: scanning
+  dependencies: [ build-image-microservice-5-checkout ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_5_CHECKOUT/
+
+sign-image-microservice-5-checkout:
+  stage: sign
+  dependencies: [ build-image-microservice-5-checkout ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_5_CHECKOUT/
+
+deploy-dev-microservice-5-checkout:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-5-checkout ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_5_CHECKOUT/
+
+deploy-teststable-microservice-5-checkout:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-5-checkout ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_5_CHECKOUT/

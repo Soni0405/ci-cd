@@ -1,0 +1,6 @@
+apiVersion: v1
+appVersion: "1.0"
+description: Chart for login microservice
+name: microservice-2-category
+version: 0.1.0 
+ 

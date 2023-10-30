@@ -1,0 +1,41 @@
+build-image-microservice-6-card-details:
+  when: manual
+  stage: publish
+  script:
+    - "you can add create image script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_6_CARD_DETAILS/
+
+container-scanning-microservice-6-card-details:
+  stage: scanning
+  dependencies: [ build-image-microservice-6-card-details ]
+  extends:
+    - "you can add conatiner scanning template ref here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_6_CARD_DETAILS/
+
+sign-image-microservice-6-card-details:
+  stage: sign
+  dependencies: [ build-image-microservice-6-card-details ]
+  script:
+    - "you can add signing script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_6_CARD_DETAILS/
+
+deploy-dev-microservice-6-card-details:
+  when: manual
+  stage: development
+  dependencies: [ build-image-microservice-6-card-details ]
+  script:
+    - "you can add deploy script here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_6_CARD_DETAILS/
+
+deploy-teststable-microservice-6-card-details:
+  when: manual
+  stage: sit
+  dependencies: [ build-image-microservice-6-card-details ]
+  script:
+    - "you can add deploy script to test env here"
+  rules:
+    - if: $TRIGGER_JOB =~ /^MICROSERVICE_6_CARD_DETAILS/
